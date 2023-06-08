@@ -8,15 +8,15 @@ class Password < ApplicationRecord
   validates :password, presence: true
   validates :url, presence: true
 
-  def editable_by?(user)
+  def editable?(user)
     user_passwords.find_by(user: user)&.editable?
   end
 
-  def shareable_by?(user)
+  def shareable?(user)
     user_passwords.find_by(user: user)&.shareable?
   end
 
-  def deletable_by?(user)
-    user_passwords.find_by(user: user)&.deleteable?
+  def deletable?(user)
+    user_passwords.find_by(user: user)&.deletable?
   end
 end

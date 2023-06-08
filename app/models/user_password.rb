@@ -27,7 +27,7 @@ class UserPassword < ApplicationRecord
     owner?
   end
 
-  def deleteable?
+  def deletable?
     owner?
   end
 end
