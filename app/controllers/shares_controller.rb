@@ -3,11 +3,12 @@ class SharesController < ApplicationController
   before_action :set_password
 
   def new 
-    @users = User.all.excluding(current_user)
+    @users = User.excluding(@password.users)
+    @user_password = UserPassword.new
   end
 
   def create
-    @user_password = @password.user_password.new(user_password_params)
+    @user_password = @password.user_passwords.new(user_password_params)
     if @user_password.save
       redirect_to @password
     else
