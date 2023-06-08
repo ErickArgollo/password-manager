@@ -1,4 +1,12 @@
 <%= form_with model: password do |form| %>
+  <% if form.object.errors.any? %>
+    <% form.object.errors.full_messages.each do |message| %>
+      <div>
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+  
   <div>
     <%= form.label :url %>
     <%= form.url_field :url %>
