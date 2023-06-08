@@ -31,7 +31,7 @@ class SharesController < ApplicationController
     params.require(:user_password).permit(:user_id, :role)
   end
 
-  def check_sharable_permission
+  def check_shareable_permission
     redirect_to @password unless current_user_password.shareable?
   end
 end
