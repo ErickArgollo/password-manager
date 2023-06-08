@@ -7,7 +7,7 @@ class UserPassword < ApplicationRecord
   validates :role, presence: true, inclusion: {in: ROLES}
 
   attribute :role, default: :viewer
-  
+
   def editable?
     owner? || editor?
   end
@@ -20,7 +20,7 @@ class UserPassword < ApplicationRecord
     owner?
   end
 
-  private 
+  private
 
   def owner?
     role == "owner"
