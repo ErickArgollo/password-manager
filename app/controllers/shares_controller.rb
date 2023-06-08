@@ -2,7 +2,7 @@ class SharesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_password
 
-  def new 
+  def new
     @users = User.excluding(@password.users)
     @user_password = UserPassword.new
   end
@@ -21,7 +21,7 @@ class SharesController < ApplicationController
     redirect_to @password
   end
 
-  private 
+  private
 
   def set_password
     @password = current_user.passwords.find(params[:password_id])
