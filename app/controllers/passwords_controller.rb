@@ -10,7 +10,7 @@ class PasswordsController < ApplicationController
     @password = Password.new
   end
 
-  def show 
+  def show
   end
 
   def create
@@ -36,7 +36,7 @@ class PasswordsController < ApplicationController
   def destroy
     @password.destroy
     redirect_to root_path
-  end 
+  end
 
   private
 
