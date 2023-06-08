@@ -23,3 +23,15 @@
     <pre class="my-0 flex-grow"><code><%= @password.password %></code></pre>
     <%= button_tag "Copy", class: "px-5 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.username } %>
   </div>
+
+
+  <div class="mb-4 mt-8 flex justify-between items-center">
+    <h3 class="my-0">Shared With</h3>
+    <%= link_to "Add a user", new_password_share_path(@password) %>
+    <% @password.users.excluding(current_user).each do |user| %>
+      <div class="flex justify-between items-center">
+        <div><%= user.email %></div>
+        <%= button_to "Remove", password_share_path(@password, user), method: :delete, data: {turbo_confirm: "Are you sure?"} %>
+      </div>
+    <% end %>
+  </div>
