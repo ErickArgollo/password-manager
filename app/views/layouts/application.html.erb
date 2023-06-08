@@ -12,10 +12,27 @@
   </head>
 
   <body>
-    <main class="prose mx-auto mt-28 px-5">
+    <main class="prose max-w-none container mx-auto mt-28 px-5">
        <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
+      <nav class="flex justify-between">
+        <div class="flex items-center gap-2">
+          <%= link_to "Password Manager", root_path %>
+          <ul  class="list-none flex gap-2">
+            <li><%= link_to "Home", root_path %></li>
+          </ul> 
+        </div>
 
+        <ul class="list-none items-center flex gap-2">
+        <% if user_signed_in? %>
+          <li><%= link_to "Edit profile", edit_user_registration_path %></li>
+          <li><%= button_to "Logout", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Login", new_user_session_path  %></li>
+          <li><%= button_to "Sign up", new_user_registration_path %></li>
+        <% end %>
+        </ul>
+      </nav>
       <%= yield %>
     </main>
   </body>
