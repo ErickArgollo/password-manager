@@ -6,6 +6,7 @@ class UserPassword < ApplicationRecord
 
   validates :role, presence: true, inclusion: { in: ROLES }
 
+  attribute :role, default: :viewer
   def owner?
     role == 'owner'
   end
@@ -16,5 +17,17 @@ class UserPassword < ApplicationRecord
 
   def viewer?
     role == 'viewer'
+  end
+
+  def editable?
+    owner? || editor?
+  end
+
+  def shareable?
+    owner?
+  end
+
+  def deleteable?
+    owner?
   end
 end
