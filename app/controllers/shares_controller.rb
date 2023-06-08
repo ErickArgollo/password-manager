@@ -27,6 +27,6 @@ class SharesController < ApplicationController
   end
 
   def user_password_params
-    params.require(:user_password).permit(:user_id, :owner)
+    params.require(:user_password).permit(:user_id, :role)
   end
 end
