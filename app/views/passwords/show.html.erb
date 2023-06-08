@@ -25,13 +25,14 @@
   </div>
 
 
-  <div class="mb-4 mt-8 flex justify-between items-center">
+  <div class="flex flex-col gap-1 divide-y divide-gray-100">
     <h3 class="my-0">Shared With</h3>
     <%= link_to "Add a user", new_password_share_path(@password) %>
-    <% @password.users.excluding(current_user).each do |user| %>
+    <% @password.user_passwords.includes(:user).each do |user_passwords| %>
       <div class="flex justify-between items-center">
-        <div><%= user.email %></div>
-        <%= button_to "Remove", password_share_path(@password, user), method: :delete, data: {turbo_confirm: "Are you sure?"} %>
+        <div><%= user_passwords.user.email %></div>
+        <div><%= user_passwords.role.titleize %></div>
+        <%= button_to "Remove", password_share_path(@password, user_passwords.user), method: :delete, data: {turbo_confirm: "Are you sure?"} %>
       </div>
     <% end %>
   </div>
