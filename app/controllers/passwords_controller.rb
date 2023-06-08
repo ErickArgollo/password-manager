@@ -1,6 +1,6 @@
 class PasswordsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_password, only: [:show, :update, :destroy]
+  before_action :set_password, only: [:show, :edit, :update, :destroy]
 
   def index
     @passwords = current_user.passwords
@@ -21,6 +21,22 @@ class PasswordsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+  end
+
+  def update
+    if @password.update(password_params)
+      redirect_to @password
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @password.destroy
+    redirect_to root_path
+  end 
 
   private
 
