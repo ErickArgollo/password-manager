@@ -16,8 +16,10 @@
   <h6 class="text-xs mb-1">Username / Email</h6>
   <div class="flex items-center gap-1">
     <pre class="my-0 flex-grow"><code><%= @password.username %></code></pre>
+    <%= button_tag "Copy", class: "px-5 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.username } %>
   </div>
   <h6 class="text-xs mb-1 mt-4">Password</h6>
   <div class="flex items-center gap-1">
     <pre class="my-0 flex-grow"><code><%= @password.password %></code></pre>
+    <%= button_tag "Copy", class: "px-5 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.username } %>
   </div>
