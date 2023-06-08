@@ -1,4 +1,4 @@
-<%= form_with model: @user_password, url: password_shares_path(password) do |form| %>
+<%= form_with model: user_password, url: password_shares_path(password) do |form| %>
   <div>
     <%= form.label :user_id %>
     <%= form.collection_select :user_id, users, :id, :email %>
@@ -6,7 +6,7 @@
 
   <div>
     <%= form.label :role %>
-    <%= form.select :role, UserPassword::ROLES.map(&:titleize) %>
+    <%= form.select :role, UserPassword::ROLES.map{ |r| [r.titleize, r] } %>
   </div>
 
 
