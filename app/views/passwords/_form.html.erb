@@ -6,25 +6,26 @@
       </div>
     <% end %>
   <% end %>
-  
-  <div>
+
+  <div class="field">
     <%= form.label :url %>
     <%= form.url_field :url %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :username %>
     <%= form.text_field :username %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :password %>
     <%= form.text_field :password %>
   </div>
-  <div>
+
+  <div class="field">
     <%= form.submit %>
-    <%= button_tag "Delete", form: "delete_password" %>
+    <%= button_tag "Delete", form: "delete_password" if form.object.persisted? && current_user_password.deletable? %>
   </div>
 <% end %>
 
-<%= form_with model: password, method: :delete, id: "delete_password", data: { turbo_confirm: "are you sure?" } %>
+<%= form_with model: password, method: :delete, id: "delete_password", data: {turbo_confirm: "Are you sure?"} %>

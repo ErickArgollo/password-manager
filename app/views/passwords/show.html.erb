@@ -9,30 +9,34 @@
       </svg>
     <% end %>
   </h1>
-  <%= link_to "Edit", edit_password_path(@password) if @password.editable_by?(current_user) %>
+  <%= link_to "Edit", edit_password_path(@password) if current_user_password.editable? %>
 </div>
 
-  <h3>Credentials</h3>
-  <h6 class="text-xs mb-1">Username / Email</h6>
-  <div class="flex items-center gap-1">
-    <pre class="my-0 flex-grow"><code><%= @password.username %></code></pre>
-    <%= button_tag "Copy", class: "px-5 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.username } %>
-  </div>
-  <h6 class="text-xs mb-1 mt-4">Password</h6>
-  <div class="flex items-center gap-1">
-    <pre class="my-0 flex-grow"><code><%= @password.password %></code></pre>
-    <%= button_tag "Copy", class: "px-5 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.username } %>
-  </div>
+<h3>Credentials</h3>
+<h6 class="text-xs mb-1">Username / Email</h6>
+<div class="flex items-center gap-1">
+  <pre class="my-0 flex-grow"><code><%= @password.username %></code></pre>
+  <%= button_tag "Copy", class: "px-5 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.username } %>
+</div>
+<h6 class="text-xs mb-1 mt-4">Password</h6>
+<div class="flex items-center gap-1">
+  <pre class="my-0 flex-grow"><code><%= @password.password %></code></pre>
+  <%= button_tag "Copy", class: "px-5 py-2.5 bg-gray-200 rounded", data: { controller: "clipboard", action: "click->clipboard#copy", clipboard_content_value: @password.password } %>
+</div>
 
 
-  <div class="flex flex-col gap-1 divide-y divide-gray-100">
-    <h3 class="my-0">Shared With</h3>
-    <%= link_to "Add a user", new_password_share_path(@password) if @password.shareable_by?(current_user) %>
-    <% @password.user_passwords.includes(:user).each do |user_passwords| %>
-      <div class="flex justify-between items-center">
-        <div><%= user_passwords.user.email %></div>
-        <div><%= user_passwords.role.titleize %></div>
-        <%= button_to "Remove", password_share_path(@password, user_passwords.user), method: :delete, data: {turbo_confirm: "Are you sure?"} %>
+<div class="mb-4 mt-8 flex justify-between items-center">
+  <h3 class="my-0">Shared With</h3>
+  <%= link_to "Add a user", new_password_share_path(@password) if current_user_password.shareable? %>
+</div>
+<div class="flex flex-col gap-1 divide-y divide-gray-100">
+  <% @password.user_passwords.includes(:user).each do |user_password| %>
+    <div class="grid grid-cols-3">
+      <div><%= user_password.user.email %></div>
+      <div class="text-right"><%= user_password.role.titleize %></div>
+      <div class="text-right">
+        <%= button_to "Remove", password_share_path(@password, user_password.user), method: :delete, data: {turbo_confirm: "Are you sure?"} if current_user_password.shareable? %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
