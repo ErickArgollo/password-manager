@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_134406) do
   create_table "user_passwords", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "password_id", null: false
+    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["password_id"], name: "index_user_passwords_on_password_id"
