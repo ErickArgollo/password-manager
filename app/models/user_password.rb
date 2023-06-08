@@ -4,19 +4,19 @@ class UserPassword < ApplicationRecord
   belongs_to :user
   belongs_to :password
 
-  validates :role, presence: true, inclusion: { in: ROLES }
+  validates :role, presence: true, inclusion: {in: ROLES}
 
   attribute :role, default: :viewer
   def owner?
-    role == 'owner'
+    role == "owner"
   end
 
   def editor?
-    role == 'editor'
+    role == "editor"
   end
 
   def viewer?
-    role == 'viewer'
+    role == "viewer"
   end
 
   def editable?
