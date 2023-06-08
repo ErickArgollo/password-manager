@@ -13,8 +13,9 @@
 
   <body>
     <main class="prose max-w-none container mx-auto mt-28 px-5">
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+       
+      <%= render "shared/flash" %>
+
       <nav class="flex justify-between">
         <div class="flex items-center gap-2">
           <%= link_to "Password Manager", root_path %>
